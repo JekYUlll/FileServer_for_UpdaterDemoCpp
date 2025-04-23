@@ -13,8 +13,8 @@ import (
 	"strings"
 )
 
-// GenerateSHA1For7zFiles 遍历指定目录，为 content.7z 文件生成 .sha1，忽略 -meta.7z 文件
-func GenerateSHA1For7zFiles(root string) error {
+// GenerateSHA1ForFiles 遍历指定目录，生成 .sha1，忽略 -meta.7z 文件
+func GenerateSHA1ForFiles(root string) error {
 	return filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -29,7 +29,6 @@ func GenerateSHA1For7zFiles(root string) error {
 				return nil
 			}
 
-			// 打开 .7z 文件
 			file, err := os.Open(path)
 			if err != nil {
 				return err
@@ -54,8 +53,8 @@ func GenerateSHA1For7zFiles(root string) error {
 	})
 }
 
-// GenerateMD5For7zFiles 遍历指定目录，为 content.7z 文件生成 .md5，忽略 -meta.7z 文件
-func GenerateMD5For7zFiles(root string) error {
+// GenerateMD5ForFiles 遍历指定目录，生成 .md5，忽略 -meta.7z 文件
+func GenerateMD5ForFiles(root string) error {
 	return filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -69,7 +68,6 @@ func GenerateMD5For7zFiles(root string) error {
 				return nil
 			}
 
-			// 打开文件
 			file, err := os.Open(path)
 			if err != nil {
 				return err
