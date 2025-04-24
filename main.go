@@ -17,7 +17,7 @@ func main() {
 
 	err = GenerateMD5ForFiles("./static")
 	if err != nil {
-		log.Fatalf("生成 SHA1 校验和时出错: %v", err)
+		log.Fatalf("生成 MD5 校验和时出错: %v", err)
 	}
 
 	fs := http.StripPrefix("/repo", http.FileServer(http.Dir("./static")))

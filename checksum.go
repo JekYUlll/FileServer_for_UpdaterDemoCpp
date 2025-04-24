@@ -13,15 +13,14 @@ import (
 	"strings"
 )
 
-// GenerateSHA1ForFiles 遍历指定目录，生成 .sha1，忽略 -meta.7z 文件
+// GenerateSHA1ForFiles 遍历指定目录，生成 .sha1
 func GenerateSHA1ForFiles(root string) error {
 	return filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
 		}
-
-		// if !info.IsDir() && filepath.Ext(path) == ".7z" {
-		if !info.IsDir() && filepath.Ext(path) != ".sha1" && filepath.Ext(path) != ".md5" {
+		// 忽略部分后缀
+		if !info.IsDir() && filepath.Ext(path) != ".sha1" && filepath.Ext(path) != ".md5" && filepath.Ext(path) != ".xml" && filepath.Ext(path) != ".html" && filepath.Ext(path) != ".json" {
 			filename := filepath.Base(path)
 
 			// 跳过 -meta.7z 文件
@@ -59,11 +58,10 @@ func GenerateMD5ForFiles(root string) error {
 		if err != nil {
 			return err
 		}
-
-		if !info.IsDir() && filepath.Ext(path) != ".sha1" && filepath.Ext(path) != ".md5" {
+		// 忽略部分后缀
+		if !info.IsDir() && filepath.Ext(path) != ".sha1" && filepath.Ext(path) != ".md5" && filepath.Ext(path) != ".xml" && filepath.Ext(path) != ".html" && filepath.Ext(path) != ".json" {
 			filename := filepath.Base(path)
 
-			// 跳过 -meta.7z 文件
 			if strings.HasSuffix(filename, "-meta.7z") {
 				return nil
 			}
